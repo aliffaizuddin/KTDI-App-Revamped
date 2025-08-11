@@ -1,0 +1,6 @@
+@ktdi_app_HostAddress = http://localhost:5079
+
+GET {{ktdi_app_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

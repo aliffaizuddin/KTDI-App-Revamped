@@ -1,0 +1,18 @@
+# Visual Studio and .NET files
+/dotnet-back-end/ktdi-app/appsettings.Development.json
+/dotnet-back-end/ktdi-app/appsettings.json
+/dotnet-back-end/ktdi-app/.appsettings.Production.json
+/dotnet-back-end/ktdi-app/appsettings.Staging.json
+
+# Binaries and build artifacts
+/dotnet-back-end/ktdi-app/[Bb]in/
+/dotnet-back-end/ktdi-app/[Oo]bj/
+
+# User-specific files
+/dotnet-back-end/ktdi-app/*.user
+/dotnet-back-end/ktdi-app/*.suo
+
+# Visual Studio and Visual Studio Code settings
+/dotnet-back-end/ktdi-app/.vs/
+/dotnet-back-end/ktdi-app/.vscode/
+.idea
