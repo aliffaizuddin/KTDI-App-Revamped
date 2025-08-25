@@ -1,0 +1,10 @@
+{
+  "HOME": {
+    "TITLE": "Welcome to our website",
+    "DESCRIPTION": "Your trusted partner in solutions"
+  },
+  "LOGIN": {
+    "EMAIL": "Email Address",
+    "PASSWORD": "Password"
+  }
+}
