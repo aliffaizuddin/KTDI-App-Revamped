@@ -1,10 +1,10 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
 import { provideRouter } from '@angular/router';
-import {provideTranslateService} from "@ngx-translate/core";
+import {provideTranslateService, TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {provideTranslateHttpLoader} from "@ngx-translate/http-loader";
 
 import { routes } from './app.routes';
-import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {AuthInterceptor} from './core/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
       lang: 'en',
       fallbackLang: 'en',
       loader: provideTranslateHttpLoader({
-        prefix: '/assets/i18n/global/',
+        prefix: '/assets/i18n/',
         suffix: '.json'
       })
     }),

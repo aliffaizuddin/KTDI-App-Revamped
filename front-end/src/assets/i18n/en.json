@@ -1,0 +1,48 @@
+{
+  "common": {
+    "email": "Email",
+    "password": "Password",
+    "submit": "Submit",
+    "or": "or",
+    "confirm": "Confirm",
+    "signInWithGoogle": "Sign in with Google",
+    "signUpWithGoogle": "Sign up with Google"
+  },
+  "intro": {
+    "signUp1": "Start your",
+    "signUp2": "Journey",
+    "signUp3": "with Us"
+  },
+  "login": {
+    "welcomeBack": "Welcome Back",
+    "signInToAccount": "Sign in to your account",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password",
+    "signIn": "Sign in",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign Up"
+  },
+  "signUp": {
+    "greeting": "Hello, Friend!",
+    "createAccount": "Create an account to embark on a journey with us",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "mobilePhone": "Mobile Phone",
+    "enterPhone": "Enter your phone number",
+    "signUp": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "login": "Sign In"
+  },
+  "otpVerification": {
+    "title": "OTP Verification",
+    "instruction": "Enter 6 digit code sent to your phone number"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password?",
+    "instruction": "Don't worry we got your back. Just provide us the email you registered with",
+    "enterEmail": "Enter your email",
+    "confirmation": "A password reset link has been sent to your email. Please check your mailbox."
+  }
+}

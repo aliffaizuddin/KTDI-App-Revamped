@@ -1,0 +1,48 @@
+{
+  "common": {
+    "email": "Emel",
+    "password": "Kata Laluan",
+    "submit": "Hantar",
+    "or": "atau",
+    "confirm": "Sahkan",
+    "signInWithGoogle": "Log masuk dengan Google",
+    "signUpWithGoogle": "Daftar dengan Google"
+  },
+  "intro": {
+    "signUp1": "Mulakan",
+    "signUp2": "Perjalanan",
+    "signUp3": "anda bersama Kami"
+  },
+  "login": {
+    "welcomeBack": "Selamat Kembali",
+    "signInToAccount": "Log masuk ke akaun anda",
+    "enterEmail": "Masukkan emel anda",
+    "enterPassword": "Masukkan kata laluan anda",
+    "rememberMe": "Ingat saya",
+    "forgotPassword": "Lupa Kata Laluan",
+    "signIn": "Log Masuk",
+    "noAccount": "Belum ada akaun?",
+    "signUp": "Daftar"
+  },
+  "signUp": {
+    "greeting": "Hai, Rakan!",
+    "createAccount": "Cipta akaun untuk memulakan perjalanan bersama kami",
+    "enterEmail": "Masukkan emel anda",
+    "enterPassword": "Masukkan kata laluan anda",
+    "mobilePhone": "Telefon Bimbit",
+    "enterPhone": "Masukkan nombor telefon anda",
+    "signUp": "Daftar",
+    "haveAccount": "Sudah mendaftar akaun?",
+    "login": "Log Masuk"
+  },
+  "otpVerification": {
+    "title": "Pengesahan OTP",
+    "instruction": "Masukkan kod 6 digit yang dihantar ke nombor telefon anda"
+  },
+  "forgotPassword": {
+    "title": "Lupa Kata Laluan Anda?",
+    "instruction": "Jangan risau kami akan bantu anda. Masukkan e-mel akaun yang anda daftar",
+    "enterEmail": "Masukkan emel anda",
+    "confirmation": "Pautan untuk menetapkan semula kata laluan telah dihantar ke emel anda. Sila semak peti masuk anda."
+  }
+}
