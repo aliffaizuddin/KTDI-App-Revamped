@@ -16,3 +16,16 @@
 /dotnet-back-end/ktdi-app/.vs/
 /dotnet-back-end/ktdi-app/.vscode/
 .idea
+
+# Node.js and Angular files
+/node-back-end/node_modules/
+/front-end/node_modules/
+/front-end/dist/
+/front-end/.angular/
+/front-end/.vscode/
+npm-debug.log*
+
+# Secret
+.env
+/springboot-back-end/src/main/resources/application.properties
+/front-end/src/environments/
