@@ -6,8 +6,11 @@ import {ToggleLanguageComponent} from '../../shared/ui/toggle-language/toggle-la
 import {AppPages} from '../../app.component';
 import {setActivePage} from '../../shared/utils/page-utils';
 import {AuthenticationPage} from '../../shared/utils/page-enums';
-import {AuthenticationService} from '../../core/authentication.service';
-import {LoginCredentials} from '../../core/api-interface';
+import {AuthenticationService} from '../../core/services/authentication.service';
+import {Authentication, LoginCredentials} from '../../core/models/ktdi';
+import {Router} from '@angular/router';
+import {EMPTY, map, switchMap, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-authentication',
@@ -21,6 +24,7 @@ export class AuthenticationComponent {
   AppPages = AppPages
   authPage: AuthenticationPage = AppPages.Authentication.Login;
   private formBuilder = inject(FormBuilder);
+  private router = inject(Router)
   /**
    * Authentication form consists of login and sign up
    * Login contains email & password
@@ -59,20 +63,52 @@ export class AuthenticationComponent {
     if (loginForm.valid) {
       const credentials: LoginCredentials = loginForm.value;
       if (signInMethod === 'standard') {
-        this.authenticationService.login(credentials).subscribe({
+        this.authenticationService.login$(credentials).subscribe({
           next: result => {
-            console.log('Login Successful: ', result);
-          },
-          error: error => {
-            console.error('Login error', error);
-          }
+            localStorage.setItem('token', result.token);
+            this.router.navigate(['/home']);
+            },
+
+          error: error => {console.error('Login error', error);}
         })
       }
-      else if (signInMethod == 'google'){
-      }
+      else if (signInMethod == 'google'){}
       else {
-        console.error('Login failed');
-        loginForm.markAllAsTouched()
+        Object.keys(loginForm.controls).forEach(key => {
+          loginForm.get(key)?.markAsTouched({ onlySelf: true })
+        })
+      }
+    }
+  }
+
+  /**
+   * Sign Up functions
+   * Extract signup form group from Authentication form
+   * Passed the signUp form value to Authentication service
+   * Then, logged in the user
+   * @param(signUpMethod)
+   */
+  onSignUp(signUpMethod: string) {
+    const signUpForm = this.authenticationForm.get('signUp') as FormGroup;
+    if (signUpForm.valid) {
+      const user: Authentication = signUpForm.value;
+      if (signUpMethod === 'standard') {
+        this.authenticationService.createUser$(user).pipe(
+          switchMap(() => this.authenticationService.login$({
+            email: user.email,
+            password: user.password,
+          })),
+          catchError(err => {
+            console.error('Login error: ', err);
+            return EMPTY;
+          })
+        ).subscribe({
+          next: response => {
+            localStorage.setItem('token', response.token)
+            this.router.navigate(['/home'])
+          },
+          error: error => {console.error('Authentication error: ', error);}
+        })
       }
     }
   }

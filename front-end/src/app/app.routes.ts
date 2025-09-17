@@ -1,12 +1,12 @@
 import {Routes} from '@angular/router';
-import {AuthenticationComponent} from './module/authentication/authentication.component';
-import {HomeComponent} from './module/home/home.component';
-import {DashboardComponent} from './module/dashboard/dashboard.component';
-import {FeedbackComponent} from './module/feedback/feedback.component';
-import {HallBookingComponent} from './module/hall-booking/hall-booking.component';
-import {ReportDamageComponent} from './module/report-damage/report-damage.component';
-import {RoomBookingComponent} from './module/room-booking/room-booking.component';
-import {authGuard} from './core/auth-guard';
+import {AuthenticationComponent} from './features/authentication/authentication.component';
+import {HomeComponent} from './features/home/home.component';
+import {DashboardComponent} from './features/dashboard/dashboard.component';
+import {FeedbackComponent} from './features/feedback/feedback.component';
+import {HallBookingComponent} from './features/hall-booking/hall-booking.component';
+import {ReportDamageComponent} from './features/report-damage/report-damage.component';
+import {RoomBookingComponent} from './features/room-booking/room-booking.component';
+import {authGuard} from './core/interceptors/auth-guard';
 
 export const routes: Routes = [
   {
