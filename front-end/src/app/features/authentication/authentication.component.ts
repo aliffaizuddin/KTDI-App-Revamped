@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {ToggleLanguageComponent} from '../../shared/ui/toggle-language/toggle-language.component';
@@ -7,14 +7,14 @@ import {AppPages} from '../../app.component';
 import {setActivePage} from '../../shared/utils/page-utils';
 import {AuthenticationPage} from '../../shared/utils/page-enums';
 import {AuthenticationService} from '../../core/services/authentication.service';
-import {Authentication, LoginCredentials} from '../../core/models/ktdi';
+import {Authentication} from '../../core/models/ktdi';
 import {Router} from '@angular/router';
-import {EMPTY, map, switchMap, throwError} from 'rxjs';
+import {EMPTY, switchMap} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
 @Component({
   selector: 'app-authentication',
-  imports: [CommonModule, TranslateModule, ToggleLanguageComponent],
+  imports: [CommonModule, TranslateModule, ToggleLanguageComponent, ReactiveFormsModule],
   templateUrl: './authentication.component.html',
   standalone: true,
   styleUrl: './authentication.component.css'
@@ -25,16 +25,17 @@ export class AuthenticationComponent {
   authPage: AuthenticationPage = AppPages.Authentication.Login;
   private formBuilder = inject(FormBuilder);
   private router = inject(Router)
+  private readonly authenticationService = inject(AuthenticationService);
+
   /**
    * Authentication form consists of login and sign up
    * Login contains email & password
    * Sign up contains email, password & phone number
    */
+
   authenticationForm = this.formBuilder.group({
-    login: this.formBuilder.group({
-      email: this.formBuilder.control('', [Validators.required, Validators.email]),
-      password: this.formBuilder.control('', [Validators.required])
-    }),
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]],
     signUp: this.formBuilder.group({
       email: this.formBuilder.control('', [Validators.required, Validators.email]),
       password: this.formBuilder.control('', [Validators.required]),
@@ -44,7 +45,6 @@ export class AuthenticationComponent {
       email: this.formBuilder.control('', [Validators.required, Validators.email]),
     })
   })
-  private authenticationService = inject(AuthenticationService);
 
   /**
    * Switch view from sign up -> login or vice versa
@@ -59,24 +59,23 @@ export class AuthenticationComponent {
    * Passed the login form value to Authentication service
    */
   onSignIn(signInMethod: string) {
-    const loginForm = this.authenticationForm.get('login') as FormGroup
-    if (loginForm.valid) {
-      const credentials: LoginCredentials = loginForm.value;
+    const email = this.authenticationForm.get('email') as FormControl;
+    const password = this.authenticationForm.get('password') as FormControl;
+    if (email.valid && password.valid) {
       if (signInMethod === 'standard') {
-        this.authenticationService.login$(credentials).subscribe({
+        this.authenticationService.login$({email: email.value, password: password.value}).subscribe({
           next: result => {
             localStorage.setItem('token', result.token);
             this.router.navigate(['/home']);
-            },
-
-          error: error => {console.error('Login error', error);}
+          },
+          error: error => {
+            console.error('Login error', error);
+          }
         })
-      }
-      else if (signInMethod == 'google'){}
-      else {
-        Object.keys(loginForm.controls).forEach(key => {
-          loginForm.get(key)?.markAsTouched({ onlySelf: true })
-        })
+      } else if (signInMethod == 'google') {
+      } else {
+        email.markAsTouched();
+        password.markAsTouched();
       }
     }
   }
@@ -107,7 +106,9 @@ export class AuthenticationComponent {
             localStorage.setItem('token', response.token)
             this.router.navigate(['/home'])
           },
-          error: error => {console.error('Authentication error: ', error);}
+          error: error => {
+            console.error('Authentication error: ', error);
+          }
         })
       }
     }

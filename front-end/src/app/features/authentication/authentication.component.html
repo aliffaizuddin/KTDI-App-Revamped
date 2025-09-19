@@ -20,7 +20,7 @@
         <app-toggle-language></app-toggle-language>
       </div>
 
-      <form class="space-y-5">
+      <form class="space-y-5" [formGroup]="authenticationForm">
         <!-- Email Input -->
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
@@ -33,6 +33,7 @@
             placeholder="{{ 'login.enterEmail' | translate }}"
             class="w-full px-4 py-2 border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-800"
             required
+            formControlName="email"
           />
         </div>
 
@@ -48,6 +49,7 @@
             placeholder="{{ 'login.enterPassword' | translate }}"
             class="w-full px-4 py-2 border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-800"
             required
+            formControlName="password"
           />
         </div>
 
